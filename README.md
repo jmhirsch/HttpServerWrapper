@@ -9,6 +9,9 @@ Sun HTTP Server wrapper with JSON responses, pre-created Handlers and quick cont
   - Provides a Notification framework for requests from clients
   - Easily extendable using the provided Request and Handler abstractions
   - Requires Java 14.0.1 preview or higher
+  
+  
+  #### Link to [Javadoc](https://flynn-buc.github.io/HttpServerWrapper/docs/index.html)
 
 ## Installation
 Maven: 
