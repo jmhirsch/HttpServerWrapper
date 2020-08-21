@@ -3,12 +3,16 @@
 
 Sun HTTP Server wrapper with JSON responses, pre-created Handlers and quick context creators
 
+## Features
   - Handles creation and management of the HTTP Server
   - Easily add & remove contexts from the server
   - Handles JSON responses to the client
   - Provides a Notification framework for requests from clients
   - Easily extendable using the provided Request and Handler abstractions
-  - Requires Java 14.0.1 preview or higher
+  - Abstract ServerController enables easy custom controller creations
+  
+  
+  #### Requires Java 14.0.1 preview or higher
   
   
   #### Link to [Javadoc](https://flynn-buc.github.io/HttpServerWrapper/docs/index.html)
