@@ -1,5 +1,6 @@
 package com.flynnbuc.httpserverwrapper.main;
 
+import com.flynnbuc.httpserverwrapper.interfaces.ContextManager;
 import com.sun.net.httpserver.HttpExchange;
 import com.flynnbuc.httpserverwrapper.enums.ServerMethodType;
 import com.flynnbuc.httpserverwrapper.interfaces.NotificationListener;
@@ -78,7 +79,7 @@ public class ServerController implements PropertyChangeListener {
 
     /**
      * Stops the server<br>
-     * Callback function always passes false, as server is not running<br>
+     * Callback function always passes false, as server is not running<br,
      * Callback function can be empty if desired
      *
      * @param callback function accepting a Boolean value and returning null, to be called after server has been stopped
