@@ -14,57 +14,108 @@ import com.flynnbuc.httpserverwrapper.services.ServerService;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/** <p>
+ * Defines a basic controller for {@link ServerService}. <br>
+ * If a class has dynamically generated handlers, those can be added by adding this
+ * class as a {@link PropertyChangeListener}, and firing a propertyChangeEvent. <br>
+ * In this case, evt.getPropertyName should be this.PROPERTY_CHANGE_STR, and
+ * evt.newValue should be an instance of {@link Handler}
+ * </p>
+ */
 public class ServerController implements PropertyChangeListener {
 
     private ServerService serverService;
     private final ContextManager manager;
-    private NotificationListener notificationListener;
+    private List<NotificationListener> notificationListenerList;
     public static String PROPERTY_CHANGE_STR = "Handler Added";
 
     private final RequestNumberGenerator numGenerator = new RequestNumberGenerator();
 
-    Map<Long, NetworkRequest<JSONObject>> requestQueue = new ConcurrentHashMap<>();
+    private Map<Long, NetworkRequest<JSONObject>> requestQueue = new ConcurrentHashMap<>();
 
+    /**
+     * Creates a ServerController, with the expected manager to handle context creation and notification events
+     * @param manager Class responsible for receiving notification events and creating contexts for this
+     */
     public ServerController(ContextManager manager) {
         serverService = new ServerService();
         this.manager = manager;
+        notificationListenerList = new ArrayList<>();
+        notificationListenerList.add(manager);
     }
 
-    public void setNotificationListener(NotificationListener notificationListener) {
-        this.notificationListener = notificationListener;
+    /**
+     * Adds another Notification Listener to handle events
+     *
+     * @param notificationListener listener for user requests
+     */
+    public void addNotificationListener(NotificationListener notificationListener) {
+        notificationListenerList.add(notificationListener);
     }
 
-    public synchronized void startServerService(int portNum, Function<Boolean, Void> callback) {
-        boolean created = serverService.startServer(portNum, this::createContexts);
+    /**
+     * Attemps to start {@link ServerService} with specified port num<br>
+     * Expects a callback function with boolean value of whether the server is running<br>
+     * Callback function can be empty if desired
+     *
+     * @param portNum port number to be used in the server
+     * @param callback function accepting a Boolean value and returning null to be called when server was attempted to start
+     * @return true if server is running, false otherwise
+     */
+    public synchronized boolean startServerService(int portNum, Function<Boolean, Void> callback) {
+        boolean created = serverService.startServer(portNum);
         callback.apply(created);
         manager.requestData();
+        return created;
     }
 
-    private synchronized Void createContexts(Void secureKey) {
-        return null;
-    }
-
+    /**
+     * Stops the server<br>
+     * Callback function always passes false, as server is not running<br>
+     * Callback function can be empty if desired
+     *
+     * @param callback function accepting a Boolean value and returning null, to be called after server has been stopped
+     */
     public synchronized void stopServerService(Function<Boolean, Void> callback) {
         serverService.exit();
         serverService = null;
         callback.apply(false);
     }
 
+    /**
+     * Create context from specified {@link Context} objects
+     *
+     * @param contextsToCreate {@link Context} objects to be created and added to server
+     */
     public synchronized void createContexts(Context ... contextsToCreate) {
             for (Context context : contextsToCreate) {
             serverService.addContext(context.path(), new ServerHandler(context.path(), context.type(), context.notification()));
         }
     }
 
+    /**
+     * Removes a context at specified path
+     *
+     * @param path path from "/" of the context to be removed
+     */
     public void removeContext(String path) {
         serverService.removeContext(path);
     }
 
+    /**
+     * Function to be called to handle response to the user after the data has been processed by ContextManager
+
+     * @param requestNum id of the request that should be processed
+     * @param response JSONObject representation of the request that should be sent back to client
+     * @param responseCode int code for the response code sent in the headers
+     */
     public synchronized void handleRequestResponse(long requestNum, JSONObject response, int responseCode) {
         NetworkRequest<JSONObject> request = requestQueue.remove(requestNum);
         if (request == null) {
@@ -74,7 +125,7 @@ public class ServerController implements PropertyChangeListener {
         }
     }
 
-    public synchronized void respondToRequest(JSONObject response, HttpExchange exchange, int responseCode) {
+    private synchronized void respondToRequest(JSONObject response, HttpExchange exchange, int responseCode) {
         try {
             byte[] responseBytes = response.toString().getBytes();
             exchange.sendResponseHeaders(responseCode, responseBytes.length);
@@ -86,6 +137,12 @@ public class ServerController implements PropertyChangeListener {
         }
     }
 
+    /**
+     * Adds a specified handler when a PropertyChangeEvent is fired
+     *
+     * @param evt event fired. To properly be added, evt.getPropertyName should be this.PROPERTY_CHANGE_STR,
+     *            evt.getNewValue should be an instance of {@link Handler}
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equalsIgnoreCase(PROPERTY_CHANGE_STR)){
@@ -132,7 +189,9 @@ public class ServerController implements PropertyChangeListener {
                 if (exchange.getRequestURI().toString().equalsIgnoreCase(getPath())) {
                     NetworkRequest<JSONObject> request = new NetworkRequest<>(numGenerator.incrementAndGet(), exchange, getPath());
                     requestQueue.put(request.getRequestNum(), request);
-                    notificationListener.notificationReceived(notification, requestBody, request.getRequestNum());
+                    for(NotificationListener notificationListener: notificationListenerList) {
+                        notificationListener.notificationReceived(notification, requestBody, request.getRequestNum());
+                    }
                 }
             }catch(Exception e){
                 System.err.println(e.getLocalizedMessage());
@@ -140,6 +199,9 @@ public class ServerController implements PropertyChangeListener {
         }
     }
 
+    /**
+     * Generates ID Numbers for requests, between Long.MIN_VALUE and Long.MAX_VALUE
+     */
     static class RequestNumberGenerator {
         private long requestNum;
 

@@ -7,8 +7,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 
+
+/**
+ * <p>
+ * Defines two methods to check for Local and Remote IP Addresses
+ * </p>
+ * <p>
+ * Machine must be connected to the internet, otherwise CouldNotFindIPException will be thrown
+ * </p>
+ */
 public class IPAddressChecker {
-    //Returns localIP of server
+
+    /**
+     * Returns Local IP Address <br>
+     * On MacOS: Pings google.com, returns string version of local IP Address<br>
+     * On Other systems: Requests the local IP of a Datagramsocket
+     *
+     * @return ip : String representation of local IP address
+     * @throws CouldNotFindIPException Typically thrown when there is no connection
+     */
     public static String getLocalIP() throws CouldNotFindIPException {
         String ip = null;
 
@@ -36,7 +53,12 @@ public class IPAddressChecker {
         return ip.replace("/", "");
     }
 
-    //Returns remoteIP of server
+    /**
+     * Returns remote IP Address - Should be the same accross multiple machines on the same LAN
+     *
+     * @return ip: String representation of the remote IP of this system
+     * @throws CouldNotFindIPException Typically thrown when there is no connection
+     */
     public static String getRemoteIP() throws CouldNotFindIPException{
         String ip = "";
         URL whatismyip = null;

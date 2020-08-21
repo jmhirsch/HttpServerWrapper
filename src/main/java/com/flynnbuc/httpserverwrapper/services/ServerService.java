@@ -7,37 +7,55 @@ import java.io.IOException;
 import java.net.*;
 import java.util.function.Function;
 
-/*
-Defines an HTTP Server singleton with portnum
-When starting the server,
+/**
+ * Defines an HTTP Server with a specified port num
  */
 public class ServerService {
 
     private InetSocketAddress address;
     private HttpServer server;
-    private int portNum;
+    private int portNum = -1;
 
+    /**
+     * Creates a ServerService with the specified port num
+     *
+     * @param portNum int value of the port
+     */
     public ServerService(int portNum){
         this.portNum = portNum;
     }
 
+    /**
+     * Creates an empty ServerService. Port num must be specified in startServer()
+     */
     public ServerService(){}
 
 
+    /**
+     * Returns the specified port num. Returns -1 if none were set
+     * @return int value of portNum
+     */
     public int getPortNum() {
         return portNum;
     }
 
-    public boolean startServer(int portNum, Function<Void, Void> contextCreator){
+    /**
+     * Starts a server with a specified port num
+     *
+     * @param portNum int value of port to be used
+     * @return true if server was started, false otherwise
+     */
+    public boolean startServer(int portNum){
         this.portNum = portNum;
-        return startServer(contextCreator);
+        return startServer();
     }
 
-    //Stars server using specified port num, returns true if server is created, false otherwise
-    //Caller receives a callback function to create contexts, with the secureKey as a parameter.
-    // It is expected that the caller will save the secureKey for future use. Contexts can be created
-    // later using the secureKey
-    public boolean startServer(Function <Void, Void> contextCreator){
+    /**
+     * Starts a server with a portnum already specified
+     *
+     * @return true if server was started, false otherwise
+     */
+    public boolean startServer(){
         if (portNum == -1){
             return false;
         }
@@ -46,7 +64,6 @@ public class ServerService {
             server = HttpServer.create(address, 0);
             server.setExecutor(null);
             server.start();
-            contextCreator.apply(null);
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -55,28 +72,48 @@ public class ServerService {
         return true;
     }
 
-    //Stops the server. Requires secureKey. Returns true IFF secureKey matches
+    /**
+     * Stop the server with no delay
+     */
     public void exit() {
+        exit(0);
+    }
+
+    /**
+     * Stops the server with specified delay
+     *
+     * @param delay int value of the delay before exiting the server
+     */
+    public void exit(int delay){
         try {
-            server.stop(0);
+            server.stop(delay);
             System.out.println("Server Closed");
         } catch(Exception e) {
             System.err.println("Server exited with error : " + e.getLocalizedMessage());
         }
     }
 
-    //Adds specified context. Requires secure key. Returns true IFF secureKey matches
+    /**
+     * Adds a context to this with a specified path and handler for that path
+     *
+     * @param path String representation of the path from "/" of the context
+     * @param handler Handler object to process and respond to user requests
+     */
     public void addContext(String path, HttpHandler handler){
         server.createContext(path, handler);
     }
 
 
-    //Removes context at specified path. Returns true IFF secureKey matches
+    /**
+     * Removes a context at a specified path
+     *
+     * @param path String of the context path from "/"
+     */
     public void removeContext(String path){
         try {
             server.removeContext(path);
         } catch(Exception e){
-            //System.err.println("Error in server for path: " + path + " " +e.getMessage());
+            System.err.println("Error in server for removing path: " + path + " " +e.getMessage());
         }
     }
 }
