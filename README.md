@@ -9,7 +9,7 @@ Sun HTTP Server wrapper with JSON responses, pre-created Handlers and quick cont
   - Handles JSON responses to the client
   - Provides a Notification framework for requests from clients
   - Easily extendable using the provided Request and Handler abstractions
-  - Abstract ServerController enables easy custom controller creations
+  - Abstract ServerController template enables easy custom controller creations
   
   
   #### Requires Java 14.0.1 preview or higher
