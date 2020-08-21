@@ -1,14 +1,10 @@
-package services;
+package com.flynnbuc.httpserverwrapper.services;
 
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
-import exceptions.CouldNotFindIPException;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.*;
-import java.util.Objects;
 import java.util.function.Function;
 
 /*

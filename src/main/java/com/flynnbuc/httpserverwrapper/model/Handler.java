@@ -1,4 +1,4 @@
-package model;
+package com.flynnbuc.httpserverwrapper.model;
 
 import com.sun.net.httpserver.HttpHandler;
 

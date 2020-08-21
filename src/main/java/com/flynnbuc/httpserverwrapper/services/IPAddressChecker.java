@@ -1,6 +1,6 @@
-package services;
+package com.flynnbuc.httpserverwrapper.services;
 
-import exceptions.CouldNotFindIPException;
+import com.flynnbuc.httpserverwrapper.exceptions.CouldNotFindIPException;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,15 +1,15 @@
-package main;
+package com.flynnbuc.httpserverwrapper.main;
 
 import com.sun.net.httpserver.HttpExchange;
-import enums.ServerMethodType;
-import interfaces.NotificationListener;
-import model.NetworkRequest;
-import model.Context;
-import model.Handler;
-import model.Notification;
+import com.flynnbuc.httpserverwrapper.enums.ServerMethodType;
+import com.flynnbuc.httpserverwrapper.interfaces.NotificationListener;
+import com.flynnbuc.httpserverwrapper.model.NetworkRequest;
+import com.flynnbuc.httpserverwrapper.model.Context;
+import com.flynnbuc.httpserverwrapper.model.Handler;
+import com.flynnbuc.httpserverwrapper.model.Notification;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import services.ServerService;
+import com.flynnbuc.httpserverwrapper.services.ServerService;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

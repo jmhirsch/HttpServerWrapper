@@ -1,4 +1,4 @@
-package enums;
+package com.flynnbuc.httpserverwrapper.enums;
 
 public enum ServerMethodType {
     GET("GET"),

@@ -1,6 +1,6 @@
-package interfaces;
+package com.flynnbuc.httpserverwrapper.interfaces;
 
-import model.Notification;
+import com.flynnbuc.httpserverwrapper.model.Notification;
 
 public interface NotificationListener {
      void notificationReceived(Notification notification, Object obj, long id);

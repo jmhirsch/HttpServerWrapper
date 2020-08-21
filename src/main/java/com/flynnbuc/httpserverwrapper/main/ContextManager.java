@@ -1,6 +1,6 @@
-package main;
+package com.flynnbuc.httpserverwrapper.main;
 
-import interfaces.NotificationListener;
+import com.flynnbuc.httpserverwrapper.interfaces.NotificationListener;
 
 public abstract class ContextManager implements NotificationListener {
 

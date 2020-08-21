@@ -1,4 +1,4 @@
-package model;
+package com.flynnbuc.httpserverwrapper.model;
 
 public abstract class Request<T> {
     private final long requestNum; // Should be a uniquely generated number

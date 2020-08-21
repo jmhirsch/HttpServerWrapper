@@ -1,8 +1,8 @@
-package model;
+package com.flynnbuc.httpserverwrapper.model;
 
 import com.sun.net.httpserver.HttpExchange;
 
-public class NetworkRequest<JSONObject> extends model.Request<JSONObject> {
+public class NetworkRequest<JSONObject> extends Request<JSONObject> {
     private final HttpExchange exchange;
     private final String path;
     public NetworkRequest(long requestNum, HttpExchange exchange, String path) {
