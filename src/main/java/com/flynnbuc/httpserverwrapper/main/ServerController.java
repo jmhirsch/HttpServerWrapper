@@ -15,6 +15,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
+
+/**
+ * Abstract template class for a server controller
+ *
+ * @param <T> type of data to be used to get/send requests from/to client
+ */
 public abstract class ServerController<T> implements PropertyChangeListener {
 
     public static String PROPERTY_CHANGE_STR = "Handler Added";
@@ -116,8 +122,9 @@ public abstract class ServerController<T> implements PropertyChangeListener {
     }
 
     /**
-     * Generate request num, guarantees uniqueness between LONG.MIN & LONG.MAX number of requests
-     * @return
+     * Generate request num, guarantees uniqueness between LONG.MIN and LONG.MAX number of requests
+     *
+     * @return long value for request num
      */
     protected long generateRequestNum(){
         return requestNumberGenerator.incrementAndGet();
