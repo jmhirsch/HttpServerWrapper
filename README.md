@@ -9,6 +9,9 @@ Sun HTTP Server wrapper with JSON responses, pre-created Handlers and quick cont
   - Provides a Notification framework for requests from clients
   - Easily extendable using the provided Request and Handler abstractions
   - Requires Java 14.0.1 preview or higher
+  
+  
+  #### Link to [Javadoc](https://flynn-buc.github.io/HttpServerWrapper/docs/index.html)
 
 ## Installation
 Maven: 
@@ -23,7 +26,7 @@ Jar: Pre-compiled jar available in releases
 Please see the example in tests/example
 - Todo: add example file 
 
-- Initiate the ServerController from a class which implements ContextManager`
+- Initiate the ServerController from a class implementing ContextManager
 ``` 
 serverController = new ServerController(this)
 ```
@@ -46,7 +49,7 @@ public void requestData(){
 }
 ```
 
-- Implement notificationReveived
+- Implement notificationReceived
 ```
 public void notificationReceived(Notification notification, Object obj, long id){
     switch(notification.name){
@@ -61,7 +64,7 @@ public void handle(Object obj, long id){
     int responseCode = -1
     JSONObject response = new JSONObject();
     if (obj instanceof JSONObject requestObject){
-        // process data from object
+        // process data from requestObject
         responseCode = 200
         response.put("key", data);
     }else{
