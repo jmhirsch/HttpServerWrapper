@@ -32,7 +32,7 @@ Please see the example in tests/example
 
 - Initiate the ServerController from a class implementing ContextManager
 ``` 
-serverController = new ServerController(this)
+serverController = new JSONServerController(this)
 ```
 
 - Define a function to handle the callback for starting the server
