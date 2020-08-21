@@ -64,7 +64,7 @@ public void handle(Object obj, long id){
     int responseCode = -1
     JSONObject response = new JSONObject();
     if (obj instanceof JSONObject requestObject){
-        // process data from object
+        // process data from requestObject
         responseCode = 200
         response.put("key", data);
     }else{
