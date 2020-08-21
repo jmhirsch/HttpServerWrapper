@@ -10,7 +10,7 @@ Sun HTTP Server wrapper with JSON responses, pre-created Handlers and quick cont
   - Easily extendable using the provided Request and Handler abstractions
   - Requires Java 14.0.1 preview or higher
 
-##### Installation
+## Installation
 Maven: 
 ```
 Will be added soon
@@ -18,9 +18,10 @@ Will be added soon
     
 Jar: Pre-compiled jar available in releases
 
-#### Usage
+
+## Usage
 Please see the example in tests/example
--- Todo: add example file 
+- Todo: add example file 
 
 - Initiate the ServerController from a class which implements ContextManager`
 ``` 
@@ -79,7 +80,7 @@ serverController.startServerService(portNum, this::callback)
 ```
 
 
-#### For dynamically created Handlers:
+### For dynamically created Handlers:
 - Extend Handler (i.e. MyHandler)
 - Create a local field of type PropertyChangeSupport
 - Add serverController as a listener
