@@ -32,6 +32,7 @@ public abstract class ServerController<T> implements PropertyChangeListener {
     private final ContextManager manager;
 
     public <T>ServerController(ContextManager manager){
+        serverService = new ServerService();
         this.manager = manager;
         notificationListenerList = new ArrayList<>();
         notificationListenerList.add(manager);
