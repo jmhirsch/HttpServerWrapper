@@ -20,7 +20,11 @@ Sun HTTP Server wrapper with JSON responses, pre-created Handlers and quick cont
 ## Installation
 Maven: 
 ```
-Will be added soon
+<dependency>
+  <groupId>io.github.flynn-buc</groupId>
+  <artifactId>HttpServerWrapper</artifactId>
+  <version>1.0.1</version>
+</dependency>
 ```
     
 Jar: Pre-compiled jar available in releases
