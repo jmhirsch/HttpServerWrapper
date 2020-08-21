@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.flynnbuc.httpserverwrapper.enums"},{"l":"com.flynnbuc.httpserverwrapper.exceptions"},{"l":"com.flynnbuc.httpserverwrapper.interfaces"},{"l":"com.flynnbuc.httpserverwrapper.main"},{"l":"com.flynnbuc.httpserverwrapper.model"},{"l":"com.flynnbuc.httpserverwrapper.services"}]
