@@ -18,9 +18,9 @@ import java.util.function.Function;
 public abstract class ServerController<T> implements PropertyChangeListener {
 
     public static String PROPERTY_CHANGE_STR = "Handler Added";
-
     protected final Map<Long, NetworkRequest<T>> requestQueue = new ConcurrentHashMap<>();
     protected ServerService serverService;
+    private RequestNumberGenerator requestNumberGenerator = new RequestNumberGenerator();
 
     private final List<NotificationListener> notificationListenerList;
     private final ContextManager manager;
@@ -115,11 +115,18 @@ public abstract class ServerController<T> implements PropertyChangeListener {
         }
     }
 
+    /**
+     * Generate request num, guarantees uniqueness between LONG.MIN & LONG.MAX number of requests
+     * @return
+     */
+    protected long generateRequestNum(){
+        return requestNumberGenerator.incrementAndGet();
+    }
 
     /**
      * Generates ID Numbers for requests, between Long.MIN_VALUE and Long.MAX_VALUE
      */
-    protected static class RequestNumberGenerator {
+    private static class RequestNumberGenerator {
         private long requestNum;
 
         public synchronized long incrementAndGet() {

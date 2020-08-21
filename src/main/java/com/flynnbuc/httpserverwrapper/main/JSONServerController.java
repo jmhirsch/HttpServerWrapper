@@ -32,7 +32,6 @@ import java.util.stream.Collectors;
  */
 public class JSONServerController extends ServerController<JSONObject> {
 
-    private final RequestNumberGenerator numGenerator = new RequestNumberGenerator();
     private final Map<Long, NetworkRequest<JSONObject>> requestQueue = new ConcurrentHashMap<>();
 
     /**
@@ -146,7 +145,7 @@ public class JSONServerController extends ServerController<JSONObject> {
                 }
 
                 if (exchange.getRequestURI().toString().equalsIgnoreCase(getPath())) {
-                    NetworkRequest<JSONObject> request = new NetworkRequest<>(numGenerator.incrementAndGet(), exchange, getPath());
+                    NetworkRequest<JSONObject> request = new NetworkRequest<>(generateRequestNum(), exchange, getPath());
                     requestQueue.put(request.getRequestNum(), request);
                     fireNotifications(notification, requestBody, request.getRequestNum());
                 }
