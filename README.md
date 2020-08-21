@@ -26,7 +26,7 @@ Jar: Pre-compiled jar available in releases
 Please see the example in tests/example
 - Todo: add example file 
 
-- Initiate the ServerController from a class which implements ContextManager`
+- Initiate the ServerController from a class implementing ContextManager
 ``` 
 serverController = new ServerController(this)
 ```
