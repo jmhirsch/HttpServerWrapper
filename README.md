@@ -49,7 +49,7 @@ public void requestData(){
 }
 ```
 
-- Implement notificationReveived
+- Implement notificationReceived
 ```
 public void notificationReceived(Notification notification, Object obj, long id){
     switch(notification.name){
