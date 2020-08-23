@@ -55,6 +55,7 @@ void callback(boolean arg){
 public void requestData(){
     // Create Contexts
     // Contexts should have a path, a ServerMethodType, and a Notification specified
+    // This method is called everytime the server is started
     serverController.createContexts(Context [])
 }
 ```
