@@ -57,6 +57,9 @@ public abstract class ServerController<T> implements PropertyChangeListener {
      * @return true if server is running, false otherwise
      */
     public synchronized boolean startServerService(int portNum, Function<Boolean, Void> callback) {
+        if (serverService == null){
+            serverService = new ServerService();
+        }
         boolean created = serverService.startServer(portNum);
         callback.apply(created);
         manager.requestData();
