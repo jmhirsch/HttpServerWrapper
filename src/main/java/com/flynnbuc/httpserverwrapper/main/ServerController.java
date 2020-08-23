@@ -26,7 +26,7 @@ public abstract class ServerController<T> implements PropertyChangeListener {
     public static String PROPERTY_CHANGE_STR = "Handler Added";
     protected final Map<Long, NetworkRequest<T>> requestQueue = new ConcurrentHashMap<>();
     protected ServerService serverService;
-    private RequestNumberGenerator requestNumberGenerator = new RequestNumberGenerator();
+    private final RequestNumberGenerator requestNumberGenerator = new RequestNumberGenerator();
 
     private final List<NotificationListener> notificationListenerList;
     private final ContextManager manager;
