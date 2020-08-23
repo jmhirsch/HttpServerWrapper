@@ -3,6 +3,8 @@
 
 Sun HTTP Server wrapper with JSON responses, pre-created Handlers and quick context creators
 
+Bug reports and pull requests are welcome!
+
 ## Features
   - Handles creation and management of the HTTP Server
   - Easily add & remove contexts from the server
