@@ -1,6 +1,8 @@
 package com.flynnbuc.httpserverwrapper.main;
 
 import com.flynnbuc.httpserverwrapper.interfaces.ContextManager;
+import com.flynnbuc.httpserverwrapper.interfaces.Token;
+import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.flynnbuc.httpserverwrapper.enums.ServerMethodType;
 import com.flynnbuc.httpserverwrapper.interfaces.NotificationListener;
@@ -15,6 +17,7 @@ import com.flynnbuc.httpserverwrapper.services.ServerService;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.*;
+import java.net.http.HttpHeaders;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +30,7 @@ import java.util.stream.Collectors;
  * If a class has dynamically generated handlers, those can be added by adding this
  * class as a {@link PropertyChangeListener}, and firing a propertyChangeEvent. <br>
  * In this case, evt.getPropertyName should be this.PROPERTY_CHANGE_STR, and
+ * Headers are available by calling get("headers") on the returned JSONObject
  * evt.newValue should be an instance of {@link Handler}
  * </p>
  */
@@ -52,7 +56,6 @@ public class JSONServerController extends ServerController<JSONObject> {
             serverService.addContext(context.path(), new ServerHandler(context.path(), context.type(), context.notification()));
         }
     }
-
 
     /**
      * Function to be called to handle response to the user after the data has been processed by ContextManager
@@ -147,6 +150,7 @@ public class JSONServerController extends ServerController<JSONObject> {
                 if (exchange.getRequestURI().toString().equalsIgnoreCase(getPath())) {
                     NetworkRequest<JSONObject> request = new NetworkRequest<>(generateRequestNum(), exchange, getPath());
                     requestQueue.put(request.getRequestNum(), request);
+                    requestBody.put("headers", exchange.getRequestHeaders());
                     fireNotifications(notification, requestBody, request.getRequestNum());
                 }
             }catch(Exception e){
