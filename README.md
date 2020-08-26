@@ -3,6 +3,8 @@
 
 Sun HTTP Server wrapper with JSON responses, pre-created Handlers and quick context creators
 
+Bug reports and pull requests are welcome!
+
 ## Features
   - Handles creation and management of the HTTP Server
   - Easily add & remove contexts from the server
@@ -23,7 +25,7 @@ Maven:
 <dependency>
   <groupId>io.github.flynn-buc</groupId>
   <artifactId>HttpServerWrapper</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 </dependency>
 ```
     
@@ -53,6 +55,7 @@ void callback(boolean arg){
 public void requestData(){
     // Create Contexts
     // Contexts should have a path, a ServerMethodType, and a Notification specified
+    // This method is called everytime the server is started
     serverController.createContexts(Context [])
 }
 ```
