@@ -43,7 +43,7 @@ serverController = new JSONServerController(this)
 - Define a function to handle the callback for starting the server
 This can be in a different class
 ```
-void callback(boolean arg){
+Void callback(boolean arg){
     //Do something
     return null;
 }
