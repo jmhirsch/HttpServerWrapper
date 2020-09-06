@@ -101,3 +101,9 @@ serverController.startServerService(portNum, this::callback)
 ```
     propertyChangeSupport.firePropertyChange(ServerController.PROPERTY_CHANGE_STR, null, new MyHandler(path))
 ```
+- Can also be used to handle more complex requests (i.e. return headers)
+- Notifications are not fired in custom handlers, unless you fire them yourself
+```
+fireNotifications(notification, requestBody, request.getRequestNum());
+```
+
