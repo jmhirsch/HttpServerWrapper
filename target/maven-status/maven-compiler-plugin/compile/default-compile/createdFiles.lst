@@ -11,6 +11,7 @@ com/flynnbuc/httpserverwrapper/model/Notification.class
 com/flynnbuc/httpserverwrapper/services/ServerService.class
 com/flynnbuc/httpserverwrapper/model/Context.class
 com/flynnbuc/httpserverwrapper/enums/ServerMethodType.class
+com/flynnbuc/httpserverwrapper/interfaces/Token.class
 com/flynnbuc/httpserverwrapper/exceptions/CouldNotFindIPException.class
 com/flynnbuc/httpserverwrapper/main/ServerController$RequestNumberGenerator.class
 com/flynnbuc/httpserverwrapper/model/Request.class

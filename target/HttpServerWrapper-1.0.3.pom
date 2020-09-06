@@ -9,7 +9,7 @@
     <description>Wrapper for Java Sun HTTP Server</description>
     <url>https://github.com/flynn-buc/HttpServerWrapper</url>
     <groupId>io.github.flynn-buc</groupId>
-    <version> 1.0.2</version>
+    <version>1.0.3</version>
 
     <developers>
         <developer>

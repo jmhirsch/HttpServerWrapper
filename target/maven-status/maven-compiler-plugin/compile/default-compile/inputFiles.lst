@@ -6,6 +6,7 @@
 /Users/jonathanhirsch/Documents/Projects/HttpServerWrapper/src/main/java/com/flynnbuc/httpserverwrapper/model/NetworkRequest.java
 /Users/jonathanhirsch/Documents/Projects/HttpServerWrapper/src/main/java/com/flynnbuc/httpserverwrapper/main/ServerController.java
 /Users/jonathanhirsch/Documents/Projects/HttpServerWrapper/src/main/java/com/flynnbuc/httpserverwrapper/services/OSType.java
+/Users/jonathanhirsch/Documents/Projects/HttpServerWrapper/src/main/java/com/flynnbuc/httpserverwrapper/interfaces/Token.java
 /Users/jonathanhirsch/Documents/Projects/HttpServerWrapper/src/main/java/com/flynnbuc/httpserverwrapper/services/IPAddressChecker.java
 /Users/jonathanhirsch/Documents/Projects/HttpServerWrapper/src/main/java/com/flynnbuc/httpserverwrapper/model/Handler.java
 /Users/jonathanhirsch/Documents/Projects/HttpServerWrapper/src/main/java/com/flynnbuc/httpserverwrapper/services/ServerService.java
