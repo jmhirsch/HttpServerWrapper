@@ -25,7 +25,7 @@ Maven:
 <dependency>
   <groupId>io.github.flynn-buc</groupId>
   <artifactId>HttpServerWrapper</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.4</version>
 </dependency>
 ```
     
@@ -34,7 +34,6 @@ Jar: Pre-compiled jar available in releases
 
 ## Usage
 Please see the example in tests/example
-- Todo: add example file 
 
 - Initiate the ServerController from a class implementing ContextManager
 ``` 
