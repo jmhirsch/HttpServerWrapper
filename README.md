@@ -17,7 +17,7 @@ Bug reports and pull requests are welcome!
   #### Requires Java 14.0.1 preview or higher
   
   
-  #### Link to [Javadoc](https://flynn-buc.github.io/HttpServerWrapper/docs/index.html)
+  #### Link to [Javadoc](https://jmhirsch.github.io/HttpServerWrapper/docs/index.html)
 
 ## Installation
 Maven: 
